@@ -28,10 +28,10 @@ const PostContainer = () => {
         onChange={handleSearch}
       />
       {filteredPosts.length > 0 ? (
-        filteredPosts.map((post) => (
+        filteredPosts.map((filteredPost) => (
           <PostCard
-            key={post.postId}
-            post={post}
+            key={filteredPost.postId}
+            filteredPost={filteredPost}
             setFilteredPosts={setFilteredPosts}
           />
         ))

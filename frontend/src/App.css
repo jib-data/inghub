@@ -71,7 +71,7 @@
 /* Hero */
 .hero {
   background-color: var(--bannar);
-  min-height: 300px;
+  min-height: 250px;
   margin-left: 40px;
   margin-right: 40px;
   display: flex;

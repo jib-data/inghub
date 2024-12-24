@@ -1,14 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
 
-let CommentTextArea = ({ post, setFilteredPost }) => {
+let CommentTextArea = ({ filteredPost, setFilteredPost }) => {
   const [commentText, setCommentText] = useState("");
-  const [receivedComments, setReceivedComments] = useState(post.postComments);
-  const postId = post.postId;
+  const filteredPostId = filteredPost.postId;
 
   const onAddComments = () => {
     const data = {
-      post: { postId },
+      post: { postId: filteredPostId },
       commentText,
     };
     axios
@@ -19,22 +18,17 @@ let CommentTextArea = ({ post, setFilteredPost }) => {
       })
       .then((res) => {
         const newComment = res.data;
-
-        // setReceivedComments((prevComments) => [
-        //   newComment,
-        //   ...receivedComments,
-        // ]);
-        setFilteredPost((filteredPost) => {
-          // postId, PostText, postComments
-          return {
-            ...filteredPost,
-            postComments: [...filteredPost.postComments, newComment],
-          };
-        });
-
+        // // console.log(res.data);
+        // setFilteredPost((filteredPost) => {
+        //   const updatedPost = {
+        //     ...filteredPost,
+        //     postComments: [...filteredPost.postComments, newComment],
+        //   };
+        //   return updatedPost;
+        // });
         setCommentText("");
       })
-      .catch((error) => console.log(error.response));
+      .catch((error) => console.log(error));
   };
 
   return (
