@@ -5,7 +5,7 @@ let PostCard = ({ post }) => {
   return (
     <div className="post-card">
       <Post post={post} />
-      <CommentTextArea />
+      <CommentTextArea post={post} />
     </div>
   );
 };

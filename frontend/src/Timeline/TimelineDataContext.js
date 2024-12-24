@@ -22,7 +22,7 @@ export const HomeDataProvider = ({ children }) => {
         setFollowing(res.data.following);
       })
       .catch((error) => console.log(error.response));
-  }, []);
+  }, [userId]);
 
   return (
     <HomeData.Provider

@@ -16,7 +16,7 @@ const Hero = () => {
       postText,
       dateTimeCreated: new Date().toISOString().slice(0, -1), // Removes 'Z' (UTC marker)
     };
-    console.log(localStorage.getItem("userId"));
+
     axios
       .post(
         "http://localhost:8080/posts/" + localStorage.getItem("userId"),

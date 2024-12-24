@@ -26,7 +26,6 @@ public class PostController {
 
     @PostMapping("/posts/{id}")
     public ResponseEntity<PostDTO> addPost(@PathVariable Long id , @RequestBody Post post){
-        System.out.println(id);
 
         Person person = personService.getById(id);
         if(person !=null){

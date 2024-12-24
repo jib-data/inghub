@@ -2,10 +2,10 @@ import { useState } from "react";
 import Comment from "./Comment";
 import NameCard from "./NameCard";
 
-let Post = ({ post }) => {
-  let [disable, setDisable] = useState(true);
+const Post = ({ post }) => {
+  const [disable, setDisable] = useState(true);
 
-  let handleHide = () => {
+  const handleHide = () => {
     setDisable(!disable);
   };
   return (
