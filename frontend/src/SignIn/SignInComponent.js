@@ -30,7 +30,7 @@ let SignInComponent = () => {
         localStorage.setItem("token", response.data.jwt);
         localStorage.setItem("userId", response.data.userId);
         localStorage.setItem("firstName", response.data.firstName);
-        console.log(response.data.jwt);
+
         setUsername("");
         setPassword("");
         navigate("/");

@@ -61,10 +61,8 @@ public class PersonController {
     public ResponseEntity<Person> updateUser(@PathVariable Long id, @RequestBody Person person){
 
         Person user = personService.getById(id);
-        System.out.println(user);
         if (user != null){
             person.setId(id);
-            System.out.println(person);
             return new ResponseEntity<>(personService.updateDetails(person), HttpStatus.ACCEPTED);
         }
         return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
