@@ -56,7 +56,9 @@ const Hero = () => {
             value={postText}
             onChange={(e) => setPostText(e.target.value)}
           />
-          <button onClick={handlePostAdd}>Post</button>
+          <button className="add-post" onClick={handlePostAdd}>
+            Post
+          </button>
         </div>
       </section>
     </>

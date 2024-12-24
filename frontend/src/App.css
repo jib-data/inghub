@@ -114,10 +114,21 @@
   width: 100%;
   border-radius: 50px;
   margin-right: 50px;
+  margin-bottom: 20px;
   box-shadow: inset 5px 5px 5px;
 }
 .post-input::placeholder {
   font-style: italic;
+}
+.add-post {
+  width: 60px;
+  background-color: black;
+  color: #fff;
+  border: #fff;
+  border-radius: 10px;
+}
+.add-post:hover {
+  box-shadow: 2px 2px 2px grey;
 }
 
 /* Content Section */
