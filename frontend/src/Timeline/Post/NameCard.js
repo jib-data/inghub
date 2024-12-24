@@ -1,8 +1,8 @@
-let NameCard = () => {
+let NameCard = ({ name }) => {
   return (
     <div className="name-card">
       <div className="image"></div>
-      <p className="name">Johnson Peters</p>
+      <p className="name">{name}</p>
     </div>
   );
 };

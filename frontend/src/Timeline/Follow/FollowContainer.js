@@ -1,12 +1,17 @@
-import FollowList from "./FollowList";
+import FollowListItem from "./FollowListItem";
 
-let FollowContainer = () => {
+let FollowContainer = ({ title, data }) => {
+  // Make a get request here to get the users followers
+  // I will need a function to accept followers
+  // I will need a function
   return (
     <aside className="follow-container">
-      <h5 className="follow-head">Following</h5>
-      <div>
-        <FollowList />
-      </div>
+      <h5 className="follow-head">{title}</h5>
+      <ul className="follow-list">
+        {data.map((follow) => {
+          return <FollowListItem key={follow.id} follow={follow} />;
+        })}
+      </ul>
     </aside>
   );
 };

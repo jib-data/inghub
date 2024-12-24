@@ -4,6 +4,7 @@ package com.inghub.inghub.Service;
 import com.inghub.inghub.Model.Person;
 import com.inghub.inghub.Model.Post;
 import com.inghub.inghub.Repository.PostRepository;
+import com.inghub.inghub.UtilityModel.PostDTO;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -26,8 +27,11 @@ public class PostService {
         this.personService = personService;
     }
 
-    public Post addPost(Post post){
-        return postRepository.save(post);
+    public PostDTO addPost(Post post){
+        Post newPost =  postRepository.save(post);
+        PostDTO postDTO = new PostDTO(newPost);
+        System.out.println(postDTO);
+        return postDTO;
     }
 
     public List<Post> getAllPost(){

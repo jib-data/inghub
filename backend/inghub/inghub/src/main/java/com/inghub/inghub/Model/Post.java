@@ -37,6 +37,10 @@ public class Post {
         this.postText = postText;
         this.dateCreated = dateCreated;
     }
+    public Post(String postText, LocalDateTime dateCreated){
+        this.postText = postText;
+        this.dateCreated = dateCreated;
+    }
 
     public Post(Long postId, Person person, String postText, Set<Comment> postComments, LocalDateTime dateCreated) {
         this.postId = postId;

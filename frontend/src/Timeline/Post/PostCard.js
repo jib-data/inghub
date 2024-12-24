@@ -1,12 +1,13 @@
 import CommentTextArea from "./CommentTextArea";
 import Post from "./Post";
 
-let PostCard = () => {
+let PostCard = ({ post }) => {
   return (
     <div className="post-card">
-      <Post />
+      <Post post={post} />
       <CommentTextArea />
     </div>
   );
 };
+
 export default PostCard;

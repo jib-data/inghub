@@ -12,6 +12,7 @@ public class PostDTO {
 
     private Long postId;
     private Long personId;
+    private String personName;
     private Long postLikes;
     private String postText;
     private Set<CommentDTO> postComments = new HashSet<>();
@@ -20,6 +21,7 @@ public class PostDTO {
     public PostDTO(Post post){
         this.postId = post.getPostId();
         this.personId = post.getPerson().getId();
+        this.personName = post.getPerson().getFirstName() + " " + post.getPerson().getLastName();
         this.postLikes = post.getLikes();
         this.postText = post.getPostText();
         this.postComments = post.getPostComments().stream().map(comment -> new CommentDTO(comment)).collect(Collectors.toSet());
@@ -96,5 +98,13 @@ public class PostDTO {
                 ", postComments=" + postComments +
                 ", dateCreated=" + dateCreated +
                 '}';
+    }
+
+    public String getPersonName() {
+        return personName;
+    }
+
+    public void setPersonName(String personName) {
+        this.personName = personName;
     }
 }

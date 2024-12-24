@@ -5,6 +5,7 @@ import com.inghub.inghub.Model.Post;
 import com.inghub.inghub.Repository.PostRepository;
 import com.inghub.inghub.Service.PersonService;
 import com.inghub.inghub.Service.PostService;
+import com.inghub.inghub.UtilityModel.PostDTO;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +24,15 @@ public class PostController {
         this.personService = personService;
     }
 
-    @PostMapping("/post")
-    public ResponseEntity<Post> addPost(@RequestBody Post post){
-        Long personId = post.getPerson().getId();
-        Person person = personService.getById(personId);
+    @PostMapping("/posts/{id}")
+    public ResponseEntity<PostDTO> addPost(@PathVariable Long id , @RequestBody Post post){
+        System.out.println(id);
+
+        Person person = personService.getById(id);
         if(person !=null){
             post.setDateCreated(LocalDateTime.now());
             post.setPerson(person);
+            System.out.println(post);
             return new ResponseEntity<>(postService.addPost(post), HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);

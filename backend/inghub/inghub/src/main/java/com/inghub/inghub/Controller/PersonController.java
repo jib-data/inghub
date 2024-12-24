@@ -5,10 +5,7 @@ import com.inghub.inghub.Model.Post;
 import com.inghub.inghub.Repository.PersonRepository;
 import com.inghub.inghub.Service.PersonService;
 import com.inghub.inghub.Service.PostService;
-import com.inghub.inghub.UtilityModel.FrontendDTO;
-import com.inghub.inghub.UtilityModel.LoginObject;
-import com.inghub.inghub.UtilityModel.PersonDetails;
-import com.inghub.inghub.UtilityModel.SignupObject;
+import com.inghub.inghub.UtilityModel.*;
 import com.inghub.inghub.UtilityService.JWTService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -41,7 +40,6 @@ public class PersonController {
         if (newUser != null){
             String jwt = jwtService.generateJwtToken(newUser.getUsername());
             List<Post> posts = postService.getAllPost();
-            System.out.println(jwt);
             FrontendDTO payload = new FrontendDTO(newUser, posts, jwt);
             return new ResponseEntity<>(payload, HttpStatus.CREATED);
         }
@@ -92,6 +90,17 @@ public class PersonController {
             return personService.unfollow(followerId, followedId);
         }
         return false;
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<HomeDTO> getHomeData(@PathVariable Long id){
+        System.out.println(id);
+        Person person = personService.getById(id);
+        Set<Person> followers = person.getFollowers();
+        Set<Person> following = person.getFollowing();
+        List<Post> posts = postService.getAllPost();
+        List<PostDTO> postDTO = posts.stream().map(post -> new PostDTO(post)).collect(Collectors.toList());
+        HomeDTO homeDTO = new HomeDTO(followers, following, postDTO);
+        return new ResponseEntity<>(homeDTO, HttpStatus.OK);
     }
 
 

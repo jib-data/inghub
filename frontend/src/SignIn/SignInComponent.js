@@ -1,27 +1,40 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 let SignInComponent = () => {
   let navigate = useNavigate();
-  let [username, setUsername] = useState("lucaslee");
-  let [password, setPassword] = useState("Lucas@789");
+  let [username, setUsername] = useState("");
+  let [password, setPassword] = useState("");
+
+  // userId
+  // firstname
+  // username
+  // jwt token
 
   //   User details
   // let userDetails = JSON.parse({
   //   username: "lucaslee",
   //   password: "Lucas@789",
   // });
-  let userData = {
-    username: "lucaslee",
-    password: "Lucas@789",
-  };
 
   let handleLogin = () => {
-    console.log("axios function was called");
+    let userData = {
+      username,
+      password,
+    };
+
     axios
       .post("http://localhost:8080/login", userData)
-      .then((data) => console.log(data.data))
+      .then((response) => {
+        localStorage.setItem("token", response.data.jwt);
+        localStorage.setItem("userId", response.data.userId);
+        localStorage.setItem("firstName", response.data.firstName);
+        console.log(response.data.jwt);
+        setUsername("");
+        setPassword("");
+        navigate("/");
+      })
       .catch((error) => console.log(error));
   };
   let handleUsernameChange = (e) => {
