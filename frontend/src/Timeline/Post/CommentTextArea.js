@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-let CommentTextArea = ({ post }) => {
+let CommentTextArea = ({ post, setFilteredPost }) => {
   const [commentText, setCommentText] = useState("");
   const [receivedComments, setReceivedComments] = useState(post.postComments);
   const postId = post.postId;
@@ -19,11 +19,19 @@ let CommentTextArea = ({ post }) => {
       })
       .then((res) => {
         const newComment = res.data;
-        console.log("request went through");
-        setReceivedComments((prevComments) => [
-          newComment,
-          ...receivedComments,
-        ]);
+
+        // setReceivedComments((prevComments) => [
+        //   newComment,
+        //   ...receivedComments,
+        // ]);
+        setFilteredPost((filteredPost) => {
+          // postId, PostText, postComments
+          return {
+            ...filteredPost,
+            postComments: [...filteredPost.postComments, newComment],
+          };
+        });
+
         setCommentText("");
       })
       .catch((error) => console.log(error.response));

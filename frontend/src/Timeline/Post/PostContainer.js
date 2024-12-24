@@ -3,16 +3,13 @@ import PostCard from "./PostCard";
 import HomeData from "../TimelineDataContext";
 
 const PostContainer = () => {
-  // Extract posts from context
   const { posts, setPosts } = useContext(HomeData);
 
-  // State for filtered posts
   const [filteredPosts, setFilteredPosts] = useState([]);
 
-  // Update filteredPosts whenever posts changes
   useEffect(() => {
     setFilteredPosts(posts || []);
-  }, [posts]); // Dependency ensures filteredPosts is updated when posts changes
+  }, [posts]);
 
   const handleSearch = (e) => {
     const query = e.target.value.toLowerCase();
@@ -32,7 +29,11 @@ const PostContainer = () => {
       />
       {filteredPosts.length > 0 ? (
         filteredPosts.map((post) => (
-          <PostCard key={post.postId} post={post} setPosts={setPosts} />
+          <PostCard
+            key={post.postId}
+            post={post}
+            setFilteredPosts={setFilteredPosts}
+          />
         ))
       ) : (
         <p>No posts available</p>

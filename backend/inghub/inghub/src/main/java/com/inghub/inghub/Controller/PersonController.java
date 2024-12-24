@@ -57,10 +57,14 @@ public class PersonController {
         }
         return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
-    @PutMapping("/user")
-    public ResponseEntity<Person> updateUser(@RequestBody Person person){
-        Person user = personService.getById(person.getId());
+    @PutMapping("/user/{id}")
+    public ResponseEntity<Person> updateUser(@PathVariable Long id, @RequestBody Person person){
+
+        Person user = personService.getById(id);
+        System.out.println(user);
         if (user != null){
+            person.setId(id);
+            System.out.println(person);
             return new ResponseEntity<>(personService.updateDetails(person), HttpStatus.ACCEPTED);
         }
         return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
@@ -93,7 +97,7 @@ public class PersonController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<HomeDTO> getHomeData(@PathVariable Long id){
-        System.out.println(id);
+
         Person person = personService.getById(id);
         Set<Person> followers = person.getFollowers();
         Set<Person> following = person.getFollowing();
@@ -102,6 +106,13 @@ public class PersonController {
         HomeDTO homeDTO = new HomeDTO(followers, following, postDTO);
         return new ResponseEntity<>(homeDTO, HttpStatus.OK);
     }
-
+    @GetMapping("profile/{id}")
+    public ResponseEntity<Person> getUserById(@PathVariable Long id){
+        Person person = personService.getById(id);
+        if (person != null){
+            return new ResponseEntity<>(person, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    }
 
 }

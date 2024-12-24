@@ -18,7 +18,7 @@ let NavBar = () => {
         <Link to="/profile" className="nav-item profile">
           profile
         </Link>
-        <Link to="" className="nav-item request">
+        <Link to="/sign-in" className="nav-item request">
           logout
         </Link>
       </ul>

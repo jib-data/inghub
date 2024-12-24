@@ -77,16 +77,19 @@ public class PersonService {
        return null;
     }
     public Person updateDetails(Person person){
+        System.out.println(person);
        Optional<Person> account = personRepository.findById(person.getId());
        if(account.isPresent()){
            Person existingAccount = account.get();
            existingAccount.setFirstName(person.getFirstName());
+           System.out.println(person.getLastName());
            existingAccount.setLastName(person.getLastName());
            existingAccount.setUsername(person.getUsername());
            existingAccount.setPassword(passEncryptService.encryptPassword(person.getPassword()));
-           existingAccount.setDateOfBirth(person.getDateOfBirth());
            existingAccount.setEmail(person.getEmail());
            personRepository.save(existingAccount);
+
+
            return existingAccount;
        }
         return null;
