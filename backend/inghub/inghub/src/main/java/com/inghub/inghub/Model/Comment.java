@@ -18,6 +18,10 @@ public class Comment {
     @JoinColumn(name = "post_id", nullable = false)
     private Post post;
 
+//    @ManyToOne
+//    @JoinColumn(name = "person_id")
+//    private Person person;
+
     @Column(name = "comment_text")
     @Lob
     private String commentText;
@@ -59,7 +63,6 @@ public class Comment {
         this.post = post;
     }
 
-
     public String getCommentText() {
         return commentText;
     }
@@ -83,8 +86,13 @@ public class Comment {
     public void setDateCreated(LocalDateTime dateCreated) {
         this.dateCreated = dateCreated;
     }
+//    public Person getPerson() {
+//        return person;
+//    }
 
-
+//    public void setPerson(Person person) {
+//        this.person = person;
+//    }
 
     @Override
     public String toString() {
@@ -96,4 +104,5 @@ public class Comment {
                 ", dateCreated=" + dateCreated +
                 '}';
     }
+
 }

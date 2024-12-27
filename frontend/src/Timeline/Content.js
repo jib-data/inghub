@@ -1,18 +1,21 @@
 import { useContext } from "react";
-import FollowContainer from "./Follow/FollowContainer";
+import FollowContainer from "./Following/FollowingContainer";
 import PostContainer from "./Post/PostContainer";
 import HomeData from "./TimelineDataContext";
+import UsersContainer from "./Users/UsersContainer";
 
 const Content = () => {
-  const { followers, following } = useContext(HomeData);
-  const followerTitle = "Followers";
-  const followingTitle = "Following";
+  const { followers, users, setUsers } = useContext(HomeData);
+  console.log("users from content component");
+  console.log(users);
+
+  const followerTitle = "Following";
 
   return (
     <section className="content-section">
-      <FollowContainer title={followerTitle} data={followers} />
+      {followers && <FollowContainer title={followerTitle} data={followers} />}
       <PostContainer />
-      <FollowContainer title={followingTitle} data={following} />
+      {users && <UsersContainer users={users} setUsers={setUsers} />}
     </section>
   );
 };

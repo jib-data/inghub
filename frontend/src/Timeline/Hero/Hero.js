@@ -5,7 +5,7 @@ import axios from "axios";
 
 const Hero = () => {
   const [firstName, setFirstname] = useState(localStorage.getItem("firstName"));
-  const { followers, following, posts, setPosts } = useContext(HomeData);
+  const { followers, users, posts, setPosts } = useContext(HomeData);
   const [postText, setPostText] = useState("");
 
   const handlePostAdd = () => {
@@ -43,12 +43,12 @@ const Hero = () => {
           <h2 className="welcome-message">
             Welcome <span>{firstName}</span>
           </h2>
-          <h5 className="followers">
+          {/* <h5 className="followers">
             Followers <span className="num-followers">{followers.length}</span>
-          </h5>
-          <h5 className="following">
-            Following <span className="num-following">{following.length}</span>
-          </h5>
+          </h5> */}
+          {/* <h5 className="following">
+            Following <span className="num-following">6k</span>
+          </h5> */}
           <input
             className="post-input"
             type="text"

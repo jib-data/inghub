@@ -1,6 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 let NavBar = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/sign-in");
+  };
   return (
     <nav className="nav-bar">
       <div className="logo-div">
@@ -18,7 +23,7 @@ let NavBar = () => {
         <Link to="/profile" className="nav-item profile">
           profile
         </Link>
-        <Link to="/sign-in" className="nav-item request">
+        <Link to="/sign-in" className="nav-item request" onClick={handleLogout}>
           logout
         </Link>
       </ul>

@@ -2,7 +2,6 @@ package com.inghub.inghub.Controller;
 
 import com.inghub.inghub.Model.Person;
 import com.inghub.inghub.Model.Post;
-import com.inghub.inghub.Repository.PersonRepository;
 import com.inghub.inghub.Service.PersonService;
 import com.inghub.inghub.Service.PostService;
 import com.inghub.inghub.UtilityModel.*;
@@ -49,6 +48,7 @@ public class PersonController {
 
     public ResponseEntity<FrontendDTO> login(@RequestBody LoginObject loginObject){
         PersonDetails personDetails = personService.loginUser(loginObject);
+        System.out.println(personDetails);
         if (personDetails != null){
             String jwt = jwtService.generateJwtToken(personDetails.getUsername());
             List<Post> posts = postService.getAllPost();
@@ -95,13 +95,14 @@ public class PersonController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<HomeDTO> getHomeData(@PathVariable Long id){
-
+        System.out.println(id);
         Person person = personService.getById(id);
         Set<Person> followers = person.getFollowers();
-        Set<Person> following = person.getFollowing();
+        List<Person> users = personService.getUsers();
         List<Post> posts = postService.getAllPost();
         List<PostDTO> postDTO = posts.stream().map(post -> new PostDTO(post)).collect(Collectors.toList());
-        HomeDTO homeDTO = new HomeDTO(followers, following, postDTO);
+        HomeDTO homeDTO = new HomeDTO(followers, users, postDTO);
+        System.out.println(homeDTO);
         return new ResponseEntity<>(homeDTO, HttpStatus.OK);
     }
     @GetMapping("profile/{id}")
@@ -112,5 +113,6 @@ public class PersonController {
         }
         return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
+
 
 }

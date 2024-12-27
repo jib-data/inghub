@@ -27,12 +27,14 @@ const PostContainer = () => {
         placeholder="Search posts by author"
         onChange={handleSearch}
       />
+
       {filteredPosts.length > 0 ? (
         filteredPosts.map((filteredPost) => (
           <PostCard
             key={filteredPost.postId}
             filteredPost={filteredPost}
             setFilteredPosts={setFilteredPosts}
+            setPosts={setPosts}
           />
         ))
       ) : (

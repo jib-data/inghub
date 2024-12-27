@@ -11,11 +11,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -53,9 +52,7 @@ public class PersonService {
             System.out.println(loginObject);
 
             authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginObject.getUsername(), loginObject.getPassword()));
-
             SecurityContextHolder.getContext().setAuthentication(authentication);
-
             PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
             return personDetails;
         } catch (AuthenticationException e){
@@ -113,5 +110,10 @@ public class PersonService {
             return true;
         }
         return false;
+    }
+    public List<Person> getUsers(){
+        List<Person> users = personRepository.findAll();
+
+        return users;
     }
 }

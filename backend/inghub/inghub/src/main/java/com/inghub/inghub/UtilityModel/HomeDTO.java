@@ -8,12 +8,12 @@ import java.util.Set;
 
 public class HomeDTO {
     Set<Person> followers;
-    Set<Person> following;
+    List<Person> users;
     List<PostDTO> posts;
 
-    public HomeDTO(Set<Person> followers, Set<Person> following, List<PostDTO> posts) {
+    public HomeDTO(Set<Person> followers, List<Person> users, List<PostDTO> posts) {
         this.followers = followers;
-        this.following = following;
+        this.users = users;
         this.posts = posts;
     }
 
@@ -25,12 +25,12 @@ public class HomeDTO {
         this.followers = followers;
     }
 
-    public Set<Person> getFollowing() {
-        return following;
+    public List<Person> getUsers() {
+        return users;
     }
 
-    public void setFollowing(Set<Person> following) {
-        this.following = following;
+    public void setFollowing(List<Person> following) {
+        this.users = users;
     }
 
     public List<PostDTO> getPosts() {
@@ -39,5 +39,18 @@ public class HomeDTO {
 
     public void setPosts(List<PostDTO> posts) {
         this.posts = posts;
+    }
+
+    public void setUsers(List<Person> users) {
+        this.users = users;
+    }
+
+    @Override
+    public String toString() {
+        return "HomeDTO{" +
+                "followers=" + followers +
+                ", users=" + users +
+                ", posts=" + posts +
+                '}';
     }
 }

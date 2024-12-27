@@ -13,12 +13,12 @@ let SignUpComponent = () => {
   let [dateOfBirth, setDateOfBirth] = useState("");
 
   let userData = {
-    firstName: firstName,
-    lastName: lastName,
-    username: username,
-    email: email,
-    password: password,
-    dateOfBirth: dateOfBirth,
+    firstName,
+    lastName,
+    username,
+    email,
+    password,
+    dateOfBirth,
   };
 
   let handleSubmitRequest = () => {
@@ -34,14 +34,21 @@ let SignUpComponent = () => {
     ) {
       axios
         .post("http://localhost:8080/signup", userData)
-        .then((res) => console.log(res.data))
+        .then((res) => {
+          console.log(res.data.firstName);
+          console.log(res.data.jwt);
+          localStorage.setItem("firstName", res.data.firstName);
+          localStorage.setItem("token", res.data.jwt);
+          localStorage.setItem("userId", res.data.userId);
+          navigate("/");
+          setFirstName("");
+          setLastName("");
+          setPassword("");
+          setUserName("");
+          setEmail("");
+          setDateOfBirth("");
+        })
         .catch((error) => console.log(error));
-      setFirstName("");
-      setLastName("");
-      setPassword("");
-      setUserName("");
-      setEmail("");
-      setDateOfBirth("");
     }
   };
 

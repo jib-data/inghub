@@ -9,6 +9,7 @@ public class CommentDTO {
 
     private Long commentId;
     private Long postId;
+//    private String personName;
     private String commentText;
     private Long commentLikes;
     private LocalDateTime dateCreated;
@@ -19,6 +20,7 @@ public class CommentDTO {
         this.commentText = comment.getCommentText();
         this.commentLikes = comment.getCommentLikes();
         this.dateCreated = comment.getDateCreated();
+//        this.personName = comment.getPerson().getFirstName() + " " + comment.getPerson().getLastName();
     }
 
     public Long getCommentId() {
@@ -60,6 +62,13 @@ public class CommentDTO {
     public void setDateCreated(LocalDateTime dateCreated) {
         this.dateCreated = dateCreated;
     }
+//    public String getPersonName() {
+//        return personName;
+//    }
+
+//    public void setPersonName(String personName) {
+//        this.personName = personName;
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -83,4 +92,6 @@ public class CommentDTO {
                 ", dateCreated=" + dateCreated +
                 '}';
     }
+
+
 }

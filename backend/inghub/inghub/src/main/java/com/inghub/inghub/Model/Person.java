@@ -14,7 +14,7 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "person_id", unique = true)
-    private Long id;
+    private Long Id;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
@@ -67,11 +67,11 @@ public class Person {
     }
 
     public Long getId() {
-        return id;
+        return Id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long Id) {
+        this.Id = Id;
     }
 
     public String getFirstName() {
@@ -142,18 +142,18 @@ public class Person {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Person person)) return false;
-        return Objects.equals(id, person.id) && Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(username, person.username) && Objects.equals(password, person.password) && Objects.equals(dateOfBirth, person.dateOfBirth) && Objects.equals(following, person.following) && Objects.equals(followers, person.followers);
+        return Objects.equals(Id, person.Id) && Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(username, person.username) && Objects.equals(password, person.password) && Objects.equals(dateOfBirth, person.dateOfBirth) && Objects.equals(following, person.following) && Objects.equals(followers, person.followers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, username, password, dateOfBirth, following, followers);
+        return Objects.hash(Id, firstName, lastName, username, password, dateOfBirth, following, followers);
     }
 
     @Override
     public String toString() {
         return "Person{" +
-                "Id=" + id +
+                "Id=" + Id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", username='" + username + '\'' +

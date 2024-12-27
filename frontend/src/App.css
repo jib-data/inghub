@@ -164,6 +164,7 @@
   gap: 5px;
   justify-content: center;
   align-items: center;
+  width: 80%;
 }
 .follow-image {
   height: 20px;

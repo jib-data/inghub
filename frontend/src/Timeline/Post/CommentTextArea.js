@@ -1,31 +1,36 @@
 import axios from "axios";
 import { useState } from "react";
 
-let CommentTextArea = ({ filteredPost, setFilteredPost }) => {
+let CommentTextArea = ({ filteredPost, setFilteredPosts, setPosts }) => {
   const [commentText, setCommentText] = useState("");
   const filteredPostId = filteredPost.postId;
+  const newCommentData = {
+    post: { postId: filteredPostId },
+    commentText,
+    person: {
+      Id: localStorage.getItem("userId"),
+    },
+  };
 
   const onAddComments = () => {
-    const data = {
-      post: { postId: filteredPostId },
-      commentText,
-    };
     axios
-      .post("http://localhost:8080/comment", data, {
+      .post("http://localhost:8080/comment", newCommentData, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
       })
       .then((res) => {
         const newComment = res.data;
-        // // console.log(res.data);
-        // setFilteredPost((filteredPost) => {
-        //   const updatedPost = {
-        //     ...filteredPost,
-        //     postComments: [...filteredPost.postComments, newComment],
-        //   };
-        //   return updatedPost;
-        // });
+
+        // Update the filteredPosts array in the parent state
+        setFilteredPosts((prevPosts) =>
+          prevPosts.map((post) =>
+            post.postId === filteredPostId
+              ? { ...post, postComments: [...post.postComments, newComment] }
+              : post
+          )
+        );
+
         setCommentText("");
       })
       .catch((error) => console.log(error));
