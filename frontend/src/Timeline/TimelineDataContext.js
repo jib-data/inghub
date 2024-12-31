@@ -8,7 +8,6 @@ export const HomeDataProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
 
   useEffect(function effectFunction() {
-    console.log("Inside useEffect - first line");
     try {
       let userId = localStorage.getItem("userId");
 
